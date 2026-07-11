@@ -2,7 +2,6 @@ pipeline {
     agent any
     
     tools {
-        maven 'maven-3' 
         dockerTool 'docker-cli' // This matches the name you set in Tools
     }
 
