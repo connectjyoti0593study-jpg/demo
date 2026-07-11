@@ -16,11 +16,18 @@ pipeline {
         }
 
         stage('Build Artifact') {
+            agent {
+                docker {
+                    image 'maven:3.9-eclipse-temurin-21'
+                    // Reuses the local maven repository cache to speed up builds
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }
             steps {
-                // Compiles the Java code and creates the JAR file
                 sh 'mvn clean package -DskipTests'
             }
         }
+
 
         stage('Build & Push Docker Image') {
             steps {
