@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Replace with your actual Docker Hub username
         DOCKER_HUB_USER = 'jyoti0593study'
-        IMAGE_NAME      = 'demo'
+        IMAGE_NAME      = 'spring-boot-app'
         IMAGE_TAG       = "${BUILD_NUMBER}"
     }
 
@@ -26,8 +26,8 @@ pipeline {
             steps {
                 script {
                     // Logs into Docker Hub and builds/pushes the image
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'Earth@123', usernameVariable: 'jyoti0593study')]) {
-                        sh "docker login -u ${jyoti0593study} -p ${Earth@123}"
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                         sh "docker build -t ${DOCKER_HUB_USER}/${IMAGE_NAME}:${IMAGE_TAG} ."
                         sh "docker build -t ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest ."
                         sh "docker push ${DOCKER_HUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
