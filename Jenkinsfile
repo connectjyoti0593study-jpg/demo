@@ -53,7 +53,8 @@ pipeline {
                 // Stops the existing container if it exists, removes it, and runs the new one
                 sh "docker stop ${IMAGE_NAME} || true"
                 sh "docker rm ${IMAGE_NAME} || true"
-                sh "docker run -d -p 7070:7070 --name ${IMAGE_NAME} ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
+               // sh "docker run -d -p 7070:7070 --name ${IMAGE_NAME} ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
+                sh "docker run -d --network=jenkins-net --network-alias=my-backend --name ${IMAGE_NAME} ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
             }
         }
     }
