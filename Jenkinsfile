@@ -55,9 +55,9 @@ pipeline {
                 sh "docker rm ${IMAGE_NAME} || true"
                 
                 // 2. Create the network (ignores error if it already exists)
-               sh 'docker network create jenkins-net || true'
+               //sh 'docker network create jenkins-net || true'
                // sh "docker run -d -p 7070:7070 --name ${IMAGE_NAME} ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
-                sh "docker run -d --network=jenkins-net --network-alias=my-backend -p 7070:7070 --name ${IMAGE_NAME} ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
+                sh "docker run -d --network=jenkins --network-alias=my-backend -p 7070:7070 --name ${IMAGE_NAME} ${DOCKER_HUB_USER}/${IMAGE_NAME}:latest"
             }
         }
         
